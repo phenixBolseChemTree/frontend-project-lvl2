@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-
+import { diff } from '../index.js'
 console.log('');
 
 program
@@ -9,14 +9,8 @@ program
   .option('-f --format','<type> output format')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .action((str, options) => {
-    console.log();
+  .action((file1, file2) => {
+    console.log(diff(file1, file2));
   })
-//полезные функции: path.resolve() и process.cwd()).
-
-
-.action((strings, options) => {
-  console.log(strings.join(options.separator));
-});
 
 program.parse();

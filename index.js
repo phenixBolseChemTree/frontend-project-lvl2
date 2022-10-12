@@ -1,22 +1,15 @@
 import _ from "lodash";
 import * as fs from "node:fs";
 
-const file1 = JSON.parse(fs.readFileSync('file1.json','utf-8'));
-const file2 = JSON.parse(fs.readFileSync('file2.json','utf-8'));
-const keysNotFiltred = Object.keys(file1).concat(Object.keys(file2)).sort();
-const keys = keysNotFiltred.filter((element, index) => {
-    return keysNotFiltred.indexOf(element) === index;
-});
+export const diff = (fileName1, fileName2) => {
+  const file1 = JSON.parse(fs.readFileSync(fileName1,'utf-8'));
+  const file2 = JSON.parse(fs.readFileSync(fileName2,'utf-8'));
+  const keysNotFiltred = Object.keys(file1).concat(Object.keys(file2)).sort();
+  const keys = keysNotFiltred.filter((element, index) => {
+      return keysNotFiltred.indexOf(element) === index;
+  });
 
-  // - follow: false
-  //   host: hexlet.io
-  // - proxy: 123.234.53.22
-  // - timeout: 50
-  // + timeout: 20
-  // + verbose: true
-
-  const getDataPrepation = (file1, file2, keys) => {
-    const resultArr = [];
+  const resultArr = [];
     keys.forEach((key)=> {
       if (file1.hasOwnProperty(key) && file2.hasOwnProperty(key)) {
         if (file1[key] !== file2[key]) {
@@ -53,22 +46,15 @@ const keys = keysNotFiltred.filter((element, index) => {
         }
       }
     })
-    return resultArr;
-  }
 
-const dataPrepate = getDataPrepation(file1,file2,keys)
-
-const dataString = (dataArray) => {
-  const rr = `
+const rr = `
 {
 ${
-      dataArray.map(
-       (elem) => `  ${elem.type} ${elem.key}: ${elem.value}`
-      ).join('\n')
-    }
+resultArr.map(
+(elem) => `  ${elem.type} ${elem.key}: ${elem.value}`
+).join('\n')
 }
-  `
-  return rr;
 }
-
-console.log(dataString(dataPrepate));
+`
+      return rr;
+}
