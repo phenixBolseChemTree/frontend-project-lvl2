@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/phenixBolseChemTree/frontend-project-lvl2#readme",
   "dependencies": {
+    "asciinema-player": "^3.0.1",
     "commander": "^9.4.1",
     "eslint": "^8.25.0",
     "lodash": "^4.17.21"
