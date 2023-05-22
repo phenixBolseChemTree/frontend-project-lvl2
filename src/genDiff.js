@@ -1,34 +1,26 @@
-import fs from 'fs';
 import _ from 'lodash';
+import parseFile from './parser.js';
 
 const genDiff = (filepath1, filepath2) => {
-  const file1 = fs.readFileSync(filepath1, 'utf-8');
-  const file2 = fs.readFileSync(filepath2, 'utf-8');
+  const obj1 = parseFile(filepath1);
+  const obj2 = parseFile(filepath2);
 
-  const obj1 = JSON.parse(file1);
-  const obj2 = JSON.parse(file2);
-
-  // Получение всех ключей из обоих объектов, сортировка и удаление дубликатов
   const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
 
   const diff = keys.reduce((acc, key) => {
-    // Если ключ присутствует в обоих объектах
-    if (key in obj1 && key in obj2) {
+    if (key in obj1 && key in obj2) { // Если ключ присутствует в обоих объектах
       if (obj1[key] === obj2[key]) {
         return [...acc, `    ${key}: ${obj1[key]}`];
       }
       return [...acc, { [`- ${key}`]: obj1[key] }, { [`+ ${key}`]: obj2[key] }];
     }
-    // Если ключ присутствует только в первом объекте, добавляем строку (старое значение) в разницу
-    if (key in obj1) {
+    if (key in obj1) { // Если ключ присутствует только в первом объекте, добавляем строку
       return [...acc, { [`- ${key}`]: obj1[key] }];
     }
-    // Если ключ присутствует только во втором объекте, добавляем строку (новое значение) в разницу
-    if (key in obj2) {
+    if (key in obj2) { // Если ключ присутствует только во втором объекте, добавляем строку
       return [...acc, { [`+ ${key}`]: obj2[key] }];
     }
-    // Если ключ отсутствует в обоих объектах, оставляем разницу без изменений
-    return acc;
+    return acc; // Если ключ отсутствует в обоих объектах, оставляем разницу без изменений
   }, []);
 
   // Форматирование разницы для вывода
@@ -42,9 +34,11 @@ const genDiff = (filepath1, filepath2) => {
     const value = item[key];
     return `  ${key}: ${value}`;
   });
-
-  // Возврат отформатированной разницы
-  return `{\n${formattedDiff.join('\n')}\n}`;
+  return `{\n${formattedDiff.join('\n')}\n}`; // Возврат отформатированной разницы
 };
 
 export default genDiff;
+
+// console.log(genDiff('./files/file1.json', './files/file2.yml'));
+// console.log(genDiff('./files/file1.json', './files/file2.json'));
+// console.log(genDiff('./files/file1.yml', './files/file2.yml'));
