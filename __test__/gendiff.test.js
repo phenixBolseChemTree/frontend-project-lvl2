@@ -1,7 +1,10 @@
 import genDiff from '../src/genDiff.js';
 
-const filepath1 = './files/file1.json';
-const filepath2 = './files/file2.json';
+const pathJSON1 = './files/file1.json';
+const pathJSON2 = './files/file2.json';
+const pathYML1 = './files/file1.yml';
+const pathYML2 = './files/file2.yml';
+
 const expectedDiffFile1File2 = `{
   - follow: false
     host: hexlet.io
@@ -18,34 +21,33 @@ const expectedDiffFile2File1 = `{
   + timeout: 50
   - verbose: true
 }`;
-const expectedDiffOnlyFile1 = `{
-    follow: false
-    host: hexlet.io
-    proxy: 123.234.53.22
-    timeout: 50
-}`;
-const expectedDiffOnlyFile2 = `{
-    host: hexlet.io
-    timeout: 20
-    verbose: true
-}`;
 
-test('testFile1WithFile2', () => {
-  const diff = genDiff(filepath1, filepath2);
+test('FileJ1 - FileJ2', () => {
+  const diff = genDiff(pathJSON1, pathJSON2);
   expect(expectedDiffFile1File2).toEqual(diff);
 });
 
-test('testFile2WithFile1', () => {
-  const diff = genDiff(filepath2, filepath1);
+test('FileJ2 - FileJ1', () => {
+  const diff = genDiff(pathJSON2, pathJSON1);
   expect(expectedDiffFile2File1).toEqual(diff);
 });
 
-test('testFile1WithFile1', () => {
-  const diff = genDiff(filepath1, filepath1);
-  expect(expectedDiffOnlyFile1).toEqual(diff);
+test('FileY1 - FileY2', () => {
+  const diff = genDiff(pathYML1, pathYML2);
+  expect(expectedDiffFile1File2).toEqual(diff);
 });
 
-test('testFile2WithFile2', () => {
-  const diff = genDiff(filepath2, filepath2);
-  expect(expectedDiffOnlyFile2).toEqual(diff);
+test('FileY2 - FileY1', () => {
+  const diff = genDiff(pathYML2, pathYML1);
+  expect(expectedDiffFile2File1).toEqual(diff);
+});
+
+test('FileJ1 - FileY2', () => {
+  const diff = genDiff(pathJSON1, pathYML2);
+  expect(expectedDiffFile1File2).toEqual(diff);
+});
+
+test('FileJ2 - FileY1', () => {
+  const diff = genDiff(pathJSON2, pathYML1);
+  expect(expectedDiffFile2File1).toEqual(diff);
 });
