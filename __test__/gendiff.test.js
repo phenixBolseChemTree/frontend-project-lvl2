@@ -1,6 +1,6 @@
 import genDiff from '../src/genDiff.js';
 
-const filepath1 = "./files/file1.json";
+const filepath1 = './files/file1.json';
 const filepath2 = './files/file2.json';
 const expectedDiffFile1File2 = `{
   - follow: false
