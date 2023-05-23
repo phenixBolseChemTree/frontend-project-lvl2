@@ -7,3 +7,5 @@
 
 ## как работает gendiff
 [![asciicast](https://asciinema.org/a/585916.svg)](https://asciinema.org/a/585916)
+
+[![asciicast](https://asciinema.org/a/586694.svg)](https://asciinema.org/a/586694)
