@@ -3,6 +3,10 @@
 
 [![Node CI](https://github.com/phenixBolseChemTree/frontend-project-lvl2/actions/workflows/node.js.yml/badge.svg)](https://github.com/phenixBolseChemTree/frontend-project-lvl2/actions/workflows/node.js.yml)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/e751996640618d33ffcb/maintainability)](https://codeclimate.com/github/phenixBolseChemTree/frontend-project-lvl2/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e751996640618d33ffcb/test_coverage)](https://codeclimate.com/github/phenixBolseChemTree/frontend-project-lvl2/test_coverage)
+
 ## 'make install' для начала использования
 
 ## как работает gendiff
