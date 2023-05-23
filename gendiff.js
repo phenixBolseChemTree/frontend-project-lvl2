@@ -12,8 +12,14 @@ program
   .option('-f, --format <type>', 'output format')
   .helpOption('-h, --help', 'output usage information')
   .action((filepath1, filepath2) => {
-    const resolvedFilepath1 = path.resolve(filepath1);
-    const resolvedFilepath2 = path.resolve(filepath2);
-    genDiff(resolvedFilepath1, resolvedFilepath2);
+    console.log('filepath1 ', filepath1);
+    console.log('filepath2 ', filepath2);
+    const dirPath = process.cwd();
+    const absolutePath1 = path.resolve(dirPath, filepath1);
+    const absolutePath2 = path.resolve(dirPath, filepath2);
+    console.log('absolutePath1', absolutePath1);
+    console.log('absolutePath2', absolutePath2);
+    const diff = genDiff(absolutePath1, absolutePath2);
+    console.log(diff);
   })
   .parse(process.argv);
