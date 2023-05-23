@@ -1,9 +1,9 @@
 import genDiff from '../src/genDiff.js';
 
-const pathJSON1 = './files/file1.json';
-const pathJSON2 = './files/file2.json';
-const pathYML1 = './files/file1.yml';
-const pathYML2 = './files/file2.yml';
+const pathJSON1 = './__fixtures__/file1.json';
+const pathJSON2 = './__fixtures__/file2.json';
+const pathYML1 = './__fixtures__/file1.yml';
+const pathYML2 = './__fixtures__/file2.yml';
 
 const expectedDiffFile1File2 = `{
   - follow: false
