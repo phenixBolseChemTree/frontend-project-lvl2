@@ -22,15 +22,13 @@ const genDiff = (filepath1, filepath2) => {
     }
     return acc; // Если ключ отсутствует в обоих объектах, оставляем разницу без изменений
   }, []);
-
   // Форматирование разницы для вывода
   const formattedDiff = diff.map((item) => {
     if (typeof item === 'string') {
-      // Если элемент является строкой, оставляем его без изменений
-      return item;
+      return item; // Если элемент является строкой, оставляем его без изменений
     }
-    // Извлечение ключа и значения из объекта разницы и форматирование строки
-    const key = Object.keys(item)[0];
+    const key = Object.keys(item)[0]; // Форматирование строки
+
     const value = item[key];
     return `  ${key}: ${value}`;
   });
@@ -38,7 +36,3 @@ const genDiff = (filepath1, filepath2) => {
 };
 
 export default genDiff;
-
-// console.log(genDiff('./files/file1.json', './files/file2.yml'));
-// console.log(genDiff('./files/file1.json', './files/file2.json'));
-// console.log(genDiff('./files/file1.yml', './files/file2.yml'));
