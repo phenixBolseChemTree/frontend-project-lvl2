@@ -1,4 +1,5 @@
 import stylish from './stylish.js';
+import plain from './plain.js';
 
 export default (nodeTree, format) => {
   switch (format) {
@@ -6,6 +7,8 @@ export default (nodeTree, format) => {
       return stylish(nodeTree);
     case 'json':
       return JSON.stringify(nodeTree);
+    case 'plain':
+      return plain(nodeTree);
     default:
       throw new Error(`Uncnown ${format}`);
   }

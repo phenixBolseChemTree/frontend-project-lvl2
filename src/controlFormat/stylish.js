@@ -10,33 +10,28 @@ const stringify = (data, depth, render) => {
   return `{\n${output.join('\n')}\n${indent(depth)}  }`;
 };
 
-const render = (node, depth) => {
-  switch (node.type) {
-    case 'zeroDeep': {
-      const output = node.children.map((children) => render(children, depth + 1));
+const buildTree = (node, depth) => {
+  const {
+    type, key, value, value1, value2, children,
+  } = node;
+  const output = children ? children.map((child) => buildTree(child, depth + 1)) : [];
+
+  switch (type) {
+    case 'zeroDeep':
       return `{\n${output.join('\n')}\n}`;
-    }
-    case 'plus': {
-      return `${indent(depth)}+ ${node.key}: ${stringify(node.value, depth, render)}`;
-    }
-    case 'minus': {
-      return `${indent(depth)}- ${node.key}: ${stringify(node.value, depth, render)}`;
-    }
-    case 'replacement': {
-      const output1 = `${indent(depth)}- ${node.key}: ${stringify(node.value1, depth, render)}`;
-      const output2 = `${indent(depth)}+ ${node.key}: ${stringify(node.value2, depth, render)}`;
-      return `${output1}\n${output2}`;
-    }
-    case 'same': {
-      return `${indent(depth)}  ${node.key}: ${stringify(node.value, depth, render)}`;
-    }
-    case 'nested': {
-      const output = node.children.map((children) => render(children, depth + 1));
-      return `${indent(depth)}  ${node.key}: {\n${output.join('\n')}\n${indent(depth)}  }`;
-    }
+    case 'plus':
+      return `${indent(depth)}+ ${key}: ${stringify(value, depth, buildTree)}`;
+    case 'minus':
+      return `${indent(depth)}- ${key}: ${stringify(value, depth, buildTree)}`;
+    case 'replacement':
+      return `${indent(depth)}- ${key}: ${stringify(value1, depth, buildTree)}\n${indent(depth)}+ ${key}: ${stringify(value2, depth, buildTree)}`;
+    case 'same':
+      return `${indent(depth)}  ${key}: ${stringify(value, depth, buildTree)}`;
+    case 'nested':
+      return `${indent(depth)}  ${key}: {\n${output.join('\n')}\n${indent(depth)}  }`;
     default:
-      throw new Error(`unknown type ${node.type}`);
+      throw new Error(`unknown type ${type}`);
   }
 };
 
-export default (tree) => render(tree, 0);
+export default (tree) => buildTree(tree, 0);
