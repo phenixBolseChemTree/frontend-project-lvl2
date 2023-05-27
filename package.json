@@ -8,8 +8,8 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "jest --experimental-vm-modules",
-    "coverage": "nyc --reporter=text jest"
+    "test": "jest",
+    "coverage": "nyc --reporter=lcov --report-dir=./coverage npm run test"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "codeclimate-test-reporter": "^0.5.1",
     "eslint": "^8.41.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
