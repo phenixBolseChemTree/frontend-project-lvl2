@@ -1,21 +1,17 @@
 import _ from 'lodash';
 
-// Функция для преобразования значения в строку
 const stringify = (value) => {
   if (_.isObject(value)) {
-    return '[complex value]'; // Если значение является объектом, возвращаем '[complex value]'
+    return '[complex value]';
   }
   if (typeof value === 'string') {
-    return `'${value}'`; // Если значение является строкой, возвращаем строку, заключенную в одинарные кавычки
+    return `'${value}'`;
   }
   return String(value);
-// В остальных случаях, используем встроенную функцию String() для преобразования значения в строку
 };
 
-// Функция для получения полного имени свойства
 const getName = (properties, property) => [...properties, property].join('.');
 
-// Функция для рендеринга узлов дерева
 const buildTree = (node, properties = []) => {
   const {
     type, key, value, value1, value2, children,
