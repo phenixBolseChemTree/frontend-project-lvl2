@@ -8,4 +8,4 @@ test:
 	npx jest
 
 coverage:
-	npm run coverage
+	npm test -- --coverage --coverageProvider=v8
