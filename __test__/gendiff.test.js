@@ -22,8 +22,8 @@ test('1 default', () => {
 });
 
 test('2 stylish', () => {
-  expect(genDiff(getPath('file1.json'), getPath('file2.json'), 'stylish')).toEqual(resultStylish);
-  expect(genDiff(getPath('file1.yml'), getPath('file2.yml'), 'stylish')).toEqual(resultStylish);
+  expect(genDiff(getPath('file1.json'), getPath('file2.json'), 'stylish')).toBe(resultStylish);
+  expect(genDiff(getPath('file1.yml'), getPath('file2.yml'), 'stylish')).toBe(resultStylish);
 });
 
 test('3 plain', () => {
@@ -34,4 +34,9 @@ test('3 plain', () => {
 test('4 json', () => {
   expect(genDiff(getPath('file1.json'), getPath('file2.json'), 'json')).toBe(resultJson);
   expect(genDiff(getPath('file1.yml'), getPath('file2.yml'), 'json')).toBe(resultJson);
+});
+
+test('5 other types', () => {
+  expect(genDiff(getPath('file1.json'), getPath('file2.yml'), 'json')).toBe(resultJson);
+  expect(genDiff(getPath('file1.yml'), getPath('file2.json'), 'json')).toBe(resultJson);
 });
