@@ -33,8 +33,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: make install
-      - run: make lint
-      - run: make test
-      - run: make coverage
-      - run: codeclimate-test-reporter < coverage/lcov.info
+        - run: make install
+        - run: make lint
+        - run: make test
+        - uses: paambaati/codeclimate-action@v4
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
+        with:
+          coverageCommand: npm run coverage
+          debug: true
