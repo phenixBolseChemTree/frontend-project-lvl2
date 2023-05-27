@@ -1,90 +1,41 @@
-// import genDiff from '../src/genDiff.js';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
+import genDiff from '../src/genDiff.js';
 
-// const pathJSON1 = './__fixtures__/file1.json';
-// const pathJSON2 = './__fixtures__/file2.json';
-// const pathYML1 = './__fixtures__/file1.yml';
-// const pathYML2 = './__fixtures__/file2.yml';
+// Получение пути текущего файла
+const __filename = fileURLToPath(import.meta.url);
+console.log(__filename);
 
-// const expectedDiffFile1File2 = `{
-//   {
-//     common: {
-//       + follow: false
-//         setting1: Value 1
-//       - setting2: 200
-//       - setting3: true
-//       + setting3: null
-//       + setting4: blah blah
-//       + setting5: {
-//             key5: value5
-//         }
-//         setting6: {
-//             doge: {
-//               - wow: 
-//               + wow: so much
-//             }
-//             key: value
-//           + ops: vops
-//         }
-//     }
-//     group1: {
-//       - baz: bas
-//       + baz: bars
-//         foo: bar
-//       - nest: {
-//             key: value
-//         }
-//       + nest: str
-//     }
-//   - group2: {
-//         abc: 12345
-//         deep: {
-//             id: 45
-//         }
-//     }
-//   + group3: {
-//         deep: {
-//             id: {
-//                 number: 45
-//             }
-//         }
-//         fee: 100500
-//     }
-// }`;
-// const expectedDiffFile2File1 = `{
-//   + follow: false
-//     host: hexlet.io
-//   + proxy: 123.234.53.22
-//   - timeout: 20
-//   + timeout: 50
-//   - verbose: true
-// }`;
+// Получение пути директории текущего файла
+const __dirname = dirname(__filename);
 
-// test('FileJ1 - FileJ2', () => {
-//   const diff = genDiff(pathJSON1, pathJSON2);
-//   expect(expectedDiffFile1File2).toEqual(diff);
-// });
+// Функция для получения пути к фикстурам
+const getPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-// // test('FileJ2 - FileJ1', () => {
-// //   const diff = genDiff(pathJSON2, pathJSON1);
-// //   expect(expectedDiffFile2File1).toEqual(diff);
-// // });
+// Функция для чтения содержимого фикстуры
+const readFixtures = (filepath) => fs.readFileSync(getPath(filepath), 'utf-8');
 
-// test('FileY1 - FileY2', () => {
-//   const diff = genDiff(pathYML1, pathYML2);
-//   expect(expectedDiffFile1File2).toEqual(diff);
-// });
+const resultStylish = readFixtures('formatStylish.txt');
+const resultPlain = readFixtures('formatPlain.txt');
+const resultJson = readFixtures('formatJSON.txt');
 
-// // test('FileY2 - FileY1', () => {
-// //   const diff = genDiff(pathYML2, pathYML1);
-// //   expect(expectedDiffFile2File1).toEqual(diff);
-// // });
+test('1 default', () => {
+  expect(genDiff(getPath('file1.json'), getPath('file2.json'))).toBe(resultStylish);
+  expect(genDiff(getPath('file1.yml'), getPath('file2.yml'))).toBe(resultStylish);
+});
 
-// // test('FileJ1 - FileY2', () => {
-// //   const diff = genDiff(pathJSON1, pathYML2);
-// //   expect(expectedDiffFile1File2).toEqual(diff);
-// // });
+test('2 stylish', () => {
+  expect(genDiff(getPath('file1.json'), getPath('file2.json'), 'stylish')).toEqual(resultStylish);
+  expect(genDiff(getPath('file1.yml'), getPath('file2.yml'), 'stylish')).toEqual(resultStylish);
+});
 
-// // test('FileJ2 - FileY1', () => {
-// //   const diff = genDiff(pathJSON2, pathYML1);
-// //   expect(expectedDiffFile2File1).toEqual(diff);
-// // });
+test('3 plain', () => {
+  expect(genDiff(getPath('file1.json'), getPath('file2.json'), 'plain')).toBe(resultPlain);
+  expect(genDiff(getPath('file1.yml'), getPath('file2.yml'), 'plain')).toBe(resultPlain);
+});
+
+test('4 json', () => {
+  expect(genDiff(getPath('file1.json'), getPath('file2.json'), 'json')).toBe(resultJson);
+  expect(genDiff(getPath('file1.yml'), getPath('file2.yml'), 'json')).toBe(resultJson);
+});
