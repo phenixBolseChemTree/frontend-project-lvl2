@@ -6,3 +6,6 @@ lint:
 
 test:
 	npx jest
+
+coverage:
+	npm run coverage
