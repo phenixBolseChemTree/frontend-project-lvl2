@@ -3,13 +3,17 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import genDiff from '../src/index.js';
 
+// Получение пути текущего файла
 const __filename = fileURLToPath(import.meta.url);
 console.log(__filename);
 
+// Получение пути директории текущего файла
 const __dirname = dirname(__filename);
 
+// Функция для получения пути к фикстурам
 const getPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
+// Функция для чтения содержимого фикстуры
 const readFixtures = (filepath) => fs.readFileSync(getPath(filepath), 'utf-8');
 
 const resultStylish = readFixtures('formatStylish.txt');
