@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
-import genDiff from '../src/genDiff.js';
+import genDiff from '../src/index.js';
 
 // Получение пути текущего файла
 const __filename = fileURLToPath(import.meta.url);

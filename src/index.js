@@ -1,7 +1,7 @@
 import path from 'node:path';
 import parser from './parser.js';
 import makeDiff from './diff.js';
-import constructorFormat from './controlFormat/fomatConstructor.js';
+import formatters from './formatters/index.js';
 
 const getFormat = (filepath) => {
   const lastIndex = filepath.lastIndexOf('.');
@@ -22,6 +22,6 @@ const genDiff = (filepath1, filepath2, outputFormat = 'stylish') => {
   // buildTree дерево отличий содает вид данных легко поддающийся обработке
   const resultOutput = makeDiff(obj1, obj2);
   // format формирует нужный формат для вывода (указывается 2 арг)
-  return constructorFormat(resultOutput, outputFormat);
+  return formatters(resultOutput, outputFormat);
 };
 export default genDiff;

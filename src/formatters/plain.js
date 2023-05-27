@@ -13,7 +13,7 @@ const stringify = (value) => {
 };
 
 // Функция для получения полного имени свойства
-const getPropertyName = (properties, property) => [...properties, property].join('.');
+const getName = (properties, property) => [...properties, property].join('.');
 
 // Функция для рендеринга узлов дерева
 const buildTree = (node, properties = []) => {
@@ -25,13 +25,13 @@ const buildTree = (node, properties = []) => {
     case 'zeroDeep':
       return children.flatMap((child) => buildTree(child, properties)).join('\n');
     case 'plus':
-      return `Property '${getPropertyName(properties, key)}' was added with value: ${stringify(value)}`;
+      return `Property '${getName(properties, key)}' was added with value: ${stringify(value)}`;
     case 'minus':
-      return `Property '${getPropertyName(properties, key)}' was removed`;
+      return `Property '${getName(properties, key)}' was removed`;
     case 'same':
       return [];
     case 'replacement':
-      return `Property '${getPropertyName(properties, key)}' was updated. From ${stringify(value1)} to ${stringify(value2)}`;
+      return `Property '${getName(properties, key)}' was updated. From ${stringify(value1)} to ${stringify(value2)}`;
     case 'nested':
       return children.flatMap((child) => buildTree(child, [...properties, key])).join('\n');
     default:
