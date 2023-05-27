@@ -8,8 +8,8 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "istanbul cover jest --experimental-vm-modules",
-    "coverage": "istanbul cover ./__test__/gendiff.test.js"
+    "test": "jest --experimental-vm-modules",
+    "coverage": "nyc --reporter=text jest"
   },
   "author": "",
   "license": "ISC",
