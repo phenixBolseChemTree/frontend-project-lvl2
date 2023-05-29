@@ -17,14 +17,17 @@ const buildTree = (node, depth) => {
   const output = children ? children.map((child) => buildTree(child, depth + 1)) : [];
 
   switch (type) {
-    case 'zeroDeep':
+    case 'root':
       return `{\n${output.join('\n')}\n}`;
     case 'plus':
       return `${indent(depth)}+ ${key}: ${stringify(value, depth, buildTree)}`;
     case 'minus':
       return `${indent(depth)}- ${key}: ${stringify(value, depth, buildTree)}`;
     case 'replacement':
-      return `${indent(depth)}- ${key}: ${stringify(value1, depth, buildTree)}\n${indent(depth)}+ ${key}: ${stringify(value2, depth, buildTree)}`;
+      return [
+        `${indent(depth)}- ${key}: ${stringify(value1, depth, buildTree)}`,
+        `${indent(depth)}+ ${key}: ${stringify(value2, depth, buildTree)}`,
+      ].flatMap((arr) => arr).join('\n');
     case 'same':
       return `${indent(depth)}  ${key}: ${stringify(value, depth, buildTree)}`;
     case 'nested':

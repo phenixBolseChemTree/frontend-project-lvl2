@@ -1,13 +1,11 @@
 import yaml from 'js-yaml';
-import fs from 'fs';
 
-const parseFile = (filepath, format) => {
-  const fileData = fs.readFileSync(filepath, 'utf-8');
+const parseFile = (fileObject, format) => {
   try {
     if (format === 'yml' || format === 'yaml') {
-      return yaml.load(fileData);
+      return yaml.load(fileObject);
     }
-    return JSON.parse(fileData);
+    return JSON.parse(fileObject);
   } catch (e) {
     throw new Error(`${e} error in parser`);
   }

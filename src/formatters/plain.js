@@ -18,7 +18,7 @@ const buildTree = (node, properties = []) => {
   } = node;
 
   switch (type) {
-    case 'zeroDeep':
+    case 'root':
       return children.flatMap((child) => buildTree(child, properties)).join('\n');
     case 'plus':
       return `Property '${getName(properties, key)}' was added with value: ${stringify(value)}`;

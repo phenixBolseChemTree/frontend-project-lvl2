@@ -22,6 +22,6 @@ const buildDiff = (data1, data2) => {
   });
 };
 
-const buildTree = (data1, data2) => ({ type: 'zeroDeep', children: buildDiff(data1, data2) });
+const buildTree = (data1, data2) => ({ type: 'root', children: buildDiff(data1, data2) });
 
 export default buildTree;

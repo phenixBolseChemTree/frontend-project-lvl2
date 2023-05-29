@@ -11,6 +11,6 @@ export default (nodeTree, format) => {
     case 'plain':
       return plain(nodeTree);
     default:
-      throw new Error(`Uncnown ${format}`);
+      throw new Error(`Unknown ${format}`);
   }
 };
