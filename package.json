@@ -1,15 +1,14 @@
 {
   "name": "@hexlet/code",
   "version": "2.0.0",
-  "description": "[![Actions Status](https://github.com/phenixBolseChemTree/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/phenixBolseChemTree/frontend-project-lvl2/actions)",
+  "description": "difference calculator",
   "main": "src/index.js",
   "type": "module",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "jest",
-    "coverage": "nyc --reporter=lcov --report-dir=./coverage npm run test"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
