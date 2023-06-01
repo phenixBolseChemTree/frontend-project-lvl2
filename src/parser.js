@@ -1,11 +1,11 @@
 import yaml from 'js-yaml';
 
-const parse = (fileObject, format) => {
+const parse = (data, format) => {
   try {
     if (format === 'yml' || format === 'yaml') {
-      return yaml.load(fileObject);
+      return yaml.load(data);
     }
-    return JSON.parse(fileObject);
+    return JSON.parse(data);
   } catch (e) {
     throw new Error(`${e} error in parser`);
   }
