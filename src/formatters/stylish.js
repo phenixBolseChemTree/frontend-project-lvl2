@@ -14,7 +14,8 @@ const buildTree = (node, depth) => {
   const {
     type, key, value, value1, value2, children,
   } = node;
-  const output = children ? children.map((child) => buildTree(child, depth + 1)) : [];
+  // const output = children ? children.map((child) => buildTree(child, depth + 1)) : [];
+  const output = children ? children.flatMap((child) => buildTree(child, depth + 1)) : [];
 
   switch (type) {
     case 'root':
@@ -27,7 +28,7 @@ const buildTree = (node, depth) => {
       return [
         `${indent(depth)}- ${key}: ${stringify(value1, depth, buildTree)}`,
         `${indent(depth)}+ ${key}: ${stringify(value2, depth, buildTree)}`,
-      ].flatMap((arr) => arr).join('\n');
+      ];
     case 'same':
       return `${indent(depth)}  ${key}: ${stringify(value, depth, buildTree)}`;
     case 'nested':

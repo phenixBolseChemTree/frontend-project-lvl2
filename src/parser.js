@@ -1,6 +1,6 @@
 import yaml from 'js-yaml';
 
-const parseFile = (fileObject, format) => {
+const parse = (fileObject, format) => {
   try {
     if (format === 'yml' || format === 'yaml') {
       return yaml.load(fileObject);
@@ -11,4 +11,4 @@ const parseFile = (fileObject, format) => {
   }
 };
 
-export default parseFile;
+export default parse;

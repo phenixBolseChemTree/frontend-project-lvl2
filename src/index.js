@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import parser from './parser.js';
+import parse from './parser.js';
 import makeDiff from './diff.js';
 import formatters from './formatters/index.js';
 
@@ -11,7 +11,7 @@ const getObject = (filepath) => (fs.readFileSync(filepath, 'utf-8'));
 // билдим полный путь
 const buildFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 // парсим данные в нужный формат
-const getData = (filepath) => parser(getObject(filepath), getFormat(filepath));
+const getData = (filepath) => parse(getObject(filepath), getFormat(filepath));
 
 const genDiff = (filepath1, filepath2, outputFormat = 'stylish') => {
   const data1 = getData(buildFullPath(filepath1));
